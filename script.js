@@ -9,6 +9,7 @@ var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.5;  //must be between 0.0 and 1.0
+var guessCounter = 0;
 
 
 function startGame(){
@@ -75,10 +76,11 @@ o.start(0)
 
 
 function lightButton(btn){
-  document.getElementById("gameBtn"+btn).classList.add("lit")
+  console.log("Lighting Button" + btn)
+  document.getElementById("gameBtn"+btn).classList.add("lit");
 }
 function clearButton(btn){
-  document.getElementById("gameBtn"+btn).classList.remove("lit")
+  document.getElementById("gameBtn"+btn).classList.remove("lit");
 }
 
 function playSingleClue(btn){
@@ -90,12 +92,50 @@ function playSingleClue(btn){
 }
 
 function playClueSequence(){
-  context.resume()
+  guessCounter = 0;
+  context.resume();
   let delay = nextClueWaitTime; //set delay to initial wait time
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
-    setTimeout(playSingleClue,delay,pattern[i]) // set a timeout to play that clue
-    delay += clueHoldTime 
+    setTimeout(playSingleClue,delay,pattern[i]); // set a timeout to play that clue
+    delay += clueHoldTime; 
     delay += cluePauseTime;
   }
+}
+
+function loseGame(){
+  stopGame();
+  alert("Game Over. You lost.");
+}
+
+function winGame(){
+  stopGame();
+  alert("Congrats! You won!");
+}
+
+function guess(btn){
+  console.log("user guessed: " + btn);
+  if(!gamePlaying){
+    return;
+  }
+  
+  // add game logic here
+  if (btn != pattern[guessCounter]) {
+    loseGame();
+  } else {
+    if (guessCounter == progress) {
+      if (pattern.length-1 == progress) {
+        winGame();
+      }
+      else {
+        progress = progress + 1;
+        console.log("Progress:"+progress)
+        playClueSequence();
+      }      
+    } 
+    else {
+      guessCounter = guessCounter + 1;
+    }
+  }
+  
 }
