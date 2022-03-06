@@ -191,28 +191,28 @@ h2 {
 #gameBtn1 {
     background: lightgreen;
 }
-#gameBtn1:active {
+#gameBtn1:active, #gameBtn1:lit {
     background:green;
 }
 
 #gameBtn2 {
     background: lightblue;
 }
-#gameBtn2:active {
+#gameBtn2:active, #gameBtn2:lit  {
     background:blue;
 }
 
 #gameBtn3 {
     background: pink;
 }
-#gameBtn3:active {
+#gameBtn3:active, #gameBtn3:lit  {
     background:red;
 }
 
 #gameBtn4 {
     background: lightyellow;
 }
-#gameBtn4:active {
+#gameBtn4:active, #gameBtn4:lit  {
     background:yellow;
 }
 
