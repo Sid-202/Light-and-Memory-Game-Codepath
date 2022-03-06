@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+      This is the page head - it contains info the browser uses to display the page
+      You won't see what's in the head in the page
+      Scroll down to the body element for the page content
+    -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>The Game</title>
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- Import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    
+        <!-- This is the start of content for our page -->
+        <h1>Light and Sound Menory Game</h1>
+    
+        <p>
+            Welcome to the world of Light and Sound! /Instructions/
+        </p>
+          
+        <button id="startBtn" onclick="startGame()"> 
+          Start
+        </button>
+        <button id="endBtn" class="hidden" onclick="stopGame()"> 
+          End 
+        </button>
+
+        <div id="gameBtnArea">
+          <button id="gameBtn1"></button>
+          <button id="gameBtn2"></button>
+          <button id="gameBtn3"></button>
+          <button id="gameBtn4"></button>            
+        </div>
+          
+  </body>
+</html>
