@@ -118,44 +118,6 @@ body {
 }
 
 
-
-/* Page structure */
-.wrapper {
-  min-height: var(--wrapper-height);
-  display: grid;
-  place-items: center;
-  margin: 0 1rem;
-}
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Very light scaling for our illustration */
-.title {
-  color: #2800FF;
-  font-family: HK Grotesk;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 100px;
-  line-height: 105%;
-  margin: 0;
-}
-
-/* Very light scaling for our illustration */
-.illustration {
-  max-width: 100%;
-  max-height: var(--image-max-width);
-  margin-top: var(--image-margin);
-}
-
-/* Instructions */
-.instructions {
-  margin: 1rem auto 0;
-}
-
 /* Button - Add it from the README instructions */
 h1 {
   font-family: verdana, arial, sans-serif; 
@@ -166,21 +128,7 @@ button {
   padding: 10px;
   border-radius: 10px;
 }
-input {
-  font-family: inherit;
-  font-size: 100%;
-  background: #FFFFFF;
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  transition: 500ms;
-}
 
-/* Subheading */
-h2 {
-  color: #2800FF;
-}
 
 #gameBtnArea > button {
   width:200px;
@@ -191,28 +139,28 @@ h2 {
 #gameBtn1 {
     background: lightgreen;
 }
-#gameBtn1:active, #gameBtn1:lit {
+#gameBtn1:active, #gameBtn1.lit{
     background:green;
 }
 
 #gameBtn2 {
     background: lightblue;
 }
-#gameBtn2:active, #gameBtn2:lit  {
+#gameBtn2:active, #gameBtn2.lit {
     background:blue;
 }
 
 #gameBtn3 {
     background: pink;
 }
-#gameBtn3:active, #gameBtn3:lit  {
+#gameBtn3:active, #gameBtn3.lit  {
     background:red;
 }
 
 #gameBtn4 {
     background: lightyellow;
 }
-#gameBtn4:active, #gameBtn4:lit  {
+#gameBtn4:active, #gameBtn4.lit {
     background:yellow;
 }
 
@@ -220,16 +168,3 @@ h2 {
   display: none;
 }
 
-
-/* Interactive image */
-.illustration:active {
-  transform: translateY(5px);
-}
-
-/* Button dip
-- Toggling this class on and off will move it down and up again
-- The button transition property above determines the speed of the translate (500ms)
-*/
-.dipped {
-  transform: translateY(5px);
-}
