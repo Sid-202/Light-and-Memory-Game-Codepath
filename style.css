@@ -164,6 +164,13 @@ button {
     background:yellow;
 }
 
+#gameBtn5 {
+    background: mediumpurple;
+}
+#gameBtn5:active, #gameBtn5.lit {
+    background:purple;
+}
+
 .hidden {
   display: none;
 }
