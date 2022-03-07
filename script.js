@@ -12,6 +12,8 @@ var guessCounter = 0;
 var clueHoldTime = 1000; //how long to hold each clue's light/sound
 var gameLevels = 8;
 var strikes = 0;
+var clockTimeSeconds = 12;
+var stopCLock = false;
 
 function generateRandomPattern(){
     // initialize variables
@@ -48,7 +50,7 @@ function stopGame(){
     // swap the Start and Stop buttons
     document.getElementById("startBtn").classList.remove("hidden");
     document.getElementById("endBtn").classList.add("hidden");
-  
+    stopClock();
 }
 
 // Sound Synthesis Functions
@@ -120,6 +122,7 @@ function playClueSequence(){
     delay += clueHoldTime;
     delay += cluePauseTime;
   }
+  startClock();
   clueHoldTime -= 100
 }
 
@@ -156,6 +159,7 @@ function guess(btn){
       else {
         progress = progress + 1;
         console.log("Progress:"+progress)
+        stopClock();
         playClueSequence();
       }      
     } 
@@ -163,7 +167,6 @@ function guess(btn){
       guessCounter = guessCounter + 1;
     }
   }
-  
 }
 
 function addStrike(){
@@ -175,4 +178,25 @@ function removeAllStrikes(){
   document.getElementById("strike2").classList.add("hidden");
   document.getElementById("strike3").classList.add("hidden");
   
+}
+
+function printClockTime(s){
+  document.getElementById("clockTimer").innerHTML=s+"s";
+}
+
+function startClock(){
+  document.getElementById("clockTimer").classList.remove("hidden")
+  for(let i=clockTimeSeconds; i>=0; i--){
+    if (stopClock!=true){
+      setTimeout(printClockTime, 5000,i);
+      console.log("Clock:"+i);
+    }
+  }
+
+  
+}
+
+function stopClock(){
+  stopClock = true;
+  document.getElementById("clockTimer").classList.add("hidden");
 }
