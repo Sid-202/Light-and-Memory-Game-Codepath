@@ -1,21 +1,35 @@
 // global constants
-const clueHoldTime = 1000; //how long to hold each clue's light/sound
 const cluePauseTime = 333; //how long to pause in between clues
 const nextClueWaitTime = 1000; //how long to wait before starting playback of the clue sequence
 
 //Global Variables
-var pattern = [2, 2, 4, 3, 2, 1, 2, 4];
+var pattern = [];
 var progress = 0; 
 var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.5;  //must be between 0.0 and 1.0
 var guessCounter = 0;
+var clueHoldTime = 1000; //how long to hold each clue's light/sound
+var gameLevels = 8;
+
+function generateRandomPattern(){
+    // initialize variables
+    var num = 0;
+    // generate random numbers
+    for (let i=0; i<gameLevels; i++){
+        num = Math.ceil(Math.random()* 5); // 5 buttons 
+        pattern.push(num);
+    }
+    console.log("New pattern:["+pattern.toString()+"]");
+}
 
 
 function startGame(){
     //initialize game variables
     progress = 0;
     gamePlaying = true;
+    // create new pattern
+    generateRandomPattern();
     // swap the Start and Stop buttons
     document.getElementById("startBtn").classList.add("hidden");
     document.getElementById("endBtn").classList.remove("hidden");
@@ -38,7 +52,8 @@ const freqMap = {
   1: 261.6,
   2: 329.6,
   3: 392,
-  4: 466.2
+  4: 466.2,
+  5: 525
 }
 function playTone(btn,len){ 
   o.frequency.value = freqMap[btn]
@@ -98,9 +113,10 @@ function playClueSequence(){
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
     setTimeout(playSingleClue,delay,pattern[i]); // set a timeout to play that clue
-    delay += clueHoldTime; 
+    delay += clueHoldTime;
     delay += cluePauseTime;
   }
+  clueHoldTime -= 100
 }
 
 function loseGame(){
