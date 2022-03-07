@@ -11,6 +11,7 @@ var volume = 0.5;  //must be between 0.0 and 1.0
 var guessCounter = 0;
 var clueHoldTime = 1000; //how long to hold each clue's light/sound
 var gameLevels = 8;
+var strikes = 0;
 
 function generateRandomPattern(){
     // initialize variables
@@ -28,8 +29,11 @@ function startGame(){
     //initialize game variables
     progress = 0;
     gamePlaying = true;
+    strikes = 0;
     // create new pattern
     generateRandomPattern();
+    // remove previous strikes
+    removeAllStrikes();
     // swap the Start and Stop buttons
     document.getElementById("startBtn").classList.add("hidden");
     document.getElementById("endBtn").classList.remove("hidden");
@@ -137,7 +141,13 @@ function guess(btn){
   
   // add game logic here
   if (btn != pattern[guessCounter]) {
-    loseGame();
+    strikes++;
+    addStrike();
+    alert("Strike "+strikes+"!");
+    if (strikes == 3) {
+        setTimeout(loseGame,500,); // set a timeout to play that clue          
+    }
+    playClueSequence();
   } else {
     if (guessCounter == progress) {
       if (pattern.length-1 == progress) {
@@ -153,5 +163,16 @@ function guess(btn){
       guessCounter = guessCounter + 1;
     }
   }
+  
+}
+
+function addStrike(){
+  document.getElementById("strike"+strikes).classList.remove("hidden");
+}
+
+function removeAllStrikes(){
+  document.getElementById("strike1").classList.add("hidden");
+  document.getElementById("strike2").classList.add("hidden");
+  document.getElementById("strike3").classList.add("hidden");
   
 }

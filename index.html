@@ -21,27 +21,33 @@
   </head>
   <body>
     
-        <!-- This is the start of content for our page -->
-        <h1>Light and Sound Menory Game</h1>
+    <!-- This is the start of content for our page -->
+    <h1>Light and Sound Menory Game</h1>
     
-        <p>
-            Welcome to the world of Light and Sound! /Instructions/
-        </p>
+    <p>
+        Welcome to the world of Light and Sound! /Instructions/
+    </p>
           
-        <button id="startBtn" onclick="startGame()"> 
-          Start
-        </button>
-        <button id="endBtn" class="hidden" onclick="stopGame()"> 
-          End 
-        </button>
+    <button id="startBtn" onclick="startGame()"> 
+      Start
+    </button>
+    <button id="endBtn" class="hidden" onclick="stopGame()"> 
+      End 
+    </button>
+    <div id="strikeBoxes">
+      <span id="strike1" class="hidden">&#9746;</span>
+      <span id="strike2" class="hidden">&#9746;</span>
+      <span id="strike3" class="hidden">&#9746;</span>
 
-        <div id="gameBtnArea">
-          <button id="gameBtn1" onmousedown="startTone(1)" onmouseup="stopTone()" onclick="guess(1)"></button>
-          <button id="gameBtn2" onmousedown="startTone(2)" onmouseup="stopTone()" onclick="guess(2)"></button>
-          <button id="gameBtn3" onmousedown="startTone(3)" onmouseup="stopTone()" onclick="guess(3)"></button>
-          <button id="gameBtn4" onmousedown="startTone(4)" onmouseup="stopTone()" onclick="guess(4)"></button>          
-          <button id="gameBtn5" onmousedown="startTone(5)" onmouseup="stopTone()" onclick="guess(5)"></button>            
-        </div>
-          
+    </div>
+    <div id="gameBtnArea">
+      <button id="gameBtn1" onmousedown="startTone(1)" onmouseup="stopTone()" onclick="guess(1)"></button>
+      <button id="gameBtn2" onmousedown="startTone(2)" onmouseup="stopTone()" onclick="guess(2)"></button>
+      <button id="gameBtn3" onmousedown="startTone(3)" onmouseup="stopTone()" onclick="guess(3)"></button>
+      <button id="gameBtn4" onmousedown="startTone(4)" onmouseup="stopTone()" onclick="guess(4)"></button>          
+      <button id="gameBtn5" onmousedown="startTone(5)" onmouseup="stopTone()" onclick="guess(5)"></button>            
+    </div>
+    
+
   </body>
 </html>
