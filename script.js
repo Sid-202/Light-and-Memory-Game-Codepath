@@ -13,7 +13,17 @@ var clueHoldTime = 1000; //how long to hold each clue's light/sound
 var gameLevels = 8;
 var strikes = 0;
 var clockTimeSeconds = 12;
-var stopCLock = false;
+var stopCLocks = false;
+var clockDelay = 0;
+var clockID = null;
+
+function stopClock(){
+  stopCLocks = true;
+  document.getElementById("clockTimer").classList.add("hidden");
+  clearInterval(clockID);
+  document.getElementById("clockTimer").innerHTML = "Clock";
+  clockID = null;
+}
 
 function generateRandomPattern(){
     // initialize variables
@@ -29,6 +39,7 @@ function generateRandomPattern(){
 
 function startGame(){
     //initialize game variables
+    pattern = [];
     progress = 0;
     gamePlaying = true;
     strikes = 0;
@@ -122,7 +133,8 @@ function playClueSequence(){
     delay += clueHoldTime;
     delay += cluePauseTime;
   }
-  startClock();
+  console.log("startclock delay="+delay)
+  setTimeout(startClock, delay);
   clueHoldTime -= 100
 }
 
@@ -144,6 +156,7 @@ function guess(btn){
   
   // add game logic here
   if (btn != pattern[guessCounter]) {
+    stopClock();
     strikes++;
     addStrike();
     alert("Strike "+strikes+"!");
@@ -155,6 +168,7 @@ function guess(btn){
     if (guessCounter == progress) {
       if (pattern.length-1 == progress) {
         winGame();
+        stopClock();
       }
       else {
         progress = progress + 1;
@@ -180,23 +194,61 @@ function removeAllStrikes(){
   
 }
 
-function printClockTime(s){
-  document.getElementById("clockTimer").innerHTML=s+"s";
+function printClockTime(){
+  var s = document.getElementById("clockTimer").innerHTML
+  if (s === "10s"){
+    s = "9s"
+  } else if (s === "9s"){
+    s = "8s"
+  } else if (s === "8s"){
+    s = "7s"
+  } else if (s === "7s"){
+    s = "6s"
+  } else if (s === "6s"){
+    s = "5s"
+  } else if (s === "5s"){
+    s = "4s"
+  } else if (s === "4s"){
+    s = "3s"
+  } else if (s === "3s"){
+    s = "2s"
+  } else if (s === "2s"){
+    s = "1s"
+  } else if (s === "1s"){
+    s = "0s"
+  } else if (s === "0s"){
+    stopClock();
+    strikes++;
+    addStrike();
+    alert("Strike "+strikes+"!");
+    if (strikes == 3) {
+        setTimeout(loseGame,500); // set a timeout to play that clue          
+    }
+    playClueSequence();
+  } else {
+    s = "10s"    
+  }
+  document.getElementById("clockTimer").innerHTML = s;
 }
 
 function startClock(){
-  document.getElementById("clockTimer").classList.remove("hidden")
-  for(let i=clockTimeSeconds; i>=0; i--){
-    if (stopClock!=true){
-      setTimeout(printClockTime, 5000,i);
-      console.log("Clock:"+i);
-    }
-  }
-
+  stopCLocks = false;
+  document.getElementById("clockTimer").classList.remove("hidden");
+  document.getElementById("clockTimer").innerHTML = "Clock";
+  clockID = setInterval(printClockTime, 1000);
+  
+  
+  
+  
+//   clockDelay = 1000;
+//   for(let i=clockTimeSeconds; i>=0; i--){
+//     if (stopClock!=true){
+//       var ID = setTimeout(printClockTime, clockDelay,i);
+//       timeoutIDs.push(ID);
+//       console.log("Clock:"+i);
+//     }
+//     clockDelay += 1000;
+//   }
   
 }
 
-function stopClock(){
-  stopClock = true;
-  document.getElementById("clockTimer").classList.add("hidden");
-}
