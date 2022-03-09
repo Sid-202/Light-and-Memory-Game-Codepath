@@ -17,14 +17,6 @@ var stopCLocks = false;
 var clockDelay = 0;
 var clockID = null;
 
-function stopClock(){
-  stopCLocks = true;
-  document.getElementById("clockTimer").classList.add("hidden");
-  clearInterval(clockID);
-  document.getElementById("clockTimer").innerHTML = "Clock";
-  clockID = null;
-}
-
 function generateRandomPattern(){
     // initialize variables
     var num = 0;
@@ -51,6 +43,7 @@ function startGame(){
     document.getElementById("startBtn").classList.add("hidden");
     document.getElementById("endBtn").classList.remove("hidden");
     playClueSequence();
+    console.log("start game");
   
 }
 
@@ -62,6 +55,7 @@ function stopGame(){
     document.getElementById("startBtn").classList.remove("hidden");
     document.getElementById("endBtn").classList.add("hidden");
     stopClock();
+    console.log("stop game");
 }
 
 // Sound Synthesis Functions
@@ -161,9 +155,10 @@ function guess(btn){
     addStrike();
     alert("Strike "+strikes+"!");
     if (strikes == 3) {
-        setTimeout(loseGame,500,); // set a timeout to play that clue          
+        setTimeout(loseGame,500); // set a timeout to play that clue          
+    } else {
+        playClueSequence();
     }
-    playClueSequence();
   } else {
     if (guessCounter == progress) {
       if (pattern.length-1 == progress) {
@@ -223,8 +218,9 @@ function printClockTime(){
     alert("Strike "+strikes+"!");
     if (strikes == 3) {
         setTimeout(loseGame,500); // set a timeout to play that clue          
+    } else {
+        playClueSequence();    
     }
-    playClueSequence();
   } else {
     s = "10s"    
   }
@@ -236,19 +232,14 @@ function startClock(){
   document.getElementById("clockTimer").classList.remove("hidden");
   document.getElementById("clockTimer").innerHTML = "Clock";
   clockID = setInterval(printClockTime, 1000);
-  
-  
-  
-  
-//   clockDelay = 1000;
-//   for(let i=clockTimeSeconds; i>=0; i--){
-//     if (stopClock!=true){
-//       var ID = setTimeout(printClockTime, clockDelay,i);
-//       timeoutIDs.push(ID);
-//       console.log("Clock:"+i);
-//     }
-//     clockDelay += 1000;
-//   }
-  
+  console.log("start clock");  
 }
 
+function stopClock(){
+  stopCLocks = true;
+  document.getElementById("clockTimer").classList.add("hidden");
+  clearInterval(clockID);
+  document.getElementById("clockTimer").innerHTML = "Clock";
+  clockID = null;
+  console.log("stop clock");
+}
