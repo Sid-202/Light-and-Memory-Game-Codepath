@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" onkeypress="keyPress(event)" onkeydown="keyStartTone(event)" onkeyup="keyEndTone()">
   <head>
     <!--
       This is the page head - it contains info the browser uses to display the page
@@ -40,15 +40,14 @@
       <span id="strike3" class="hidden">&#9746;</span>
     </div>
     <div id="clockTimer" class="hidden">
-      F
     </div>
     
     <div id="gameBtnArea">
-      <button id="gameBtn1" onmousedown="startTone(1)" onmouseup="stopTone()" onclick="guess(1)"></button>
-      <button id="gameBtn2" onmousedown="startTone(2)" onmouseup="stopTone()" onclick="guess(2)"></button>
-      <button id="gameBtn3" onmousedown="startTone(3)" onmouseup="stopTone()" onclick="guess(3)"></button>
-      <button id="gameBtn4" onmousedown="startTone(4)" onmouseup="stopTone()" onclick="guess(4)"></button>          
-      <button id="gameBtn5" onmousedown="startTone(5)" onmouseup="stopTone()" onclick="guess(5)"></button>            
+      <button id="gameBtn1" onmousedown="startTone(1)" onmouseup="stopTone()" onclick="guess(1)">A</button>
+      <button id="gameBtn2" onmousedown="startTone(2)" onmouseup="stopTone()" onclick="guess(2)">S</button>
+      <button id="gameBtn3" onmousedown="startTone(3)" onmouseup="stopTone()" onclick="guess(3)">D</button>
+      <button id="gameBtn4" onmousedown="startTone(4)" onmouseup="stopTone()" onclick="guess(4)">K</button>          
+      <button id="gameBtn5" onmousedown="startTone(5)" onmouseup="stopTone()" onclick="guess(5)">L</button>            
     </div>
     
 

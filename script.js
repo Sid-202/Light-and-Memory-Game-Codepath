@@ -16,6 +16,8 @@ var clockTimeSeconds = 12;
 var stopCLocks = false;
 var clockDelay = 0;
 var clockID = null;
+var tilePressed = false;
+var tilePressNum = 0;
 
 function generateRandomPattern(){
     // initialize variables
@@ -242,4 +244,66 @@ function stopClock(){
   document.getElementById("clockTimer").innerHTML = "Clock";
   clockID = null;
   console.log("stop clock");
+}
+
+function keyPress(event){
+  var key = event.key;
+  if (key == "a" ||key == "A"){
+    guess(1);
+  }
+  if (key == "s" ||key == "S"){
+    guess(2);
+  }
+  if (key == "d" ||key == "D"){
+    guess(3);
+  }
+  if (key == "k" ||key == "K"){
+    guess(4);
+  }
+  if (key == "l" ||key == "L"){
+    guess(5);
+  }
+}
+
+function keyStartTone(event){
+  var key = event.key;
+  if (key == "a" ||key == "A"){
+    startTone(1);
+    tilePressed = true;
+    lightButton(1);
+    tilePressNum = 1;
+  }
+  if (key == "s" ||key == "S"){
+    startTone(2);
+    tilePressed = true;
+    lightButton(2);
+    tilePressNum = 2;
+  }
+  if (key == "d" ||key == "D"){
+    startTone(3);
+    tilePressed = true;
+    lightButton(3);
+    tilePressNum = 3;
+  }
+  if (key == "k" ||key == "K"){
+    startTone(4);
+    tilePressed = true;
+    lightButton(4);
+    tilePressNum = 4;
+  }
+  if (key == "l" ||key == "L"){
+    startTone(5);
+    tilePressed = true;
+    lightButton(5);  
+    tilePressNum = 5;
+  }
+}
+
+function keyEndTone(){
+  if (tilePressed == true){
+    stopTone();
+    clearButton(tilePressNum);
+    tilePressNum = 0;
+  }
+  
 }
