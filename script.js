@@ -18,6 +18,13 @@ var clockDelay = 0;
 var clockID = null;
 var tilePressed = false;
 var tilePressNum = 0;
+var keyDict = {
+  a:1,
+  s:2,
+  d:3,
+  k:4,
+  l:5
+};
 
 function generateRandomPattern(){
     // initialize variables
@@ -246,64 +253,102 @@ function stopClock(){
   console.log("stop clock");
 }
 
-function keyPress(event){
-  var key = event.key;
-  if (key == "a" ||key == "A"){
-    guess(1);
-  }
-  if (key == "s" ||key == "S"){
-    guess(2);
-  }
-  if (key == "d" ||key == "D"){
-    guess(3);
-  }
-  if (key == "k" ||key == "K"){
-    guess(4);
-  }
-  if (key == "l" ||key == "L"){
-    guess(5);
-  }
-}
-
 function keyStartTone(event){
   var key = event.key;
+  if (tilePressed == true) {
+    var keyLastPressed;
+    if (tilePressNum == 1){keyLastPressed = "a";}
+    if (tilePressNum == 2){keyLastPressed = "s";}
+    if (tilePressNum == 3){keyLastPressed = "d";}
+    if (tilePressNum == 4){keyLastPressed = "k";}
+    if (tilePressNum == 5){keyLastPressed = "l";}
+    
+    var keyUpEvent = new KeyboardEvent("keyup", {key:keyLastPressed, shiftKey:false, ctrlKey:false, metaKey:false});
+    keyEndTone(keyUpEvent);
+      
+  }
   if (key == "a" ||key == "A"){
-    startTone(1);
-    tilePressed = true;
-    lightButton(1);
-    tilePressNum = 1;
+      key = 1;      
   }
   if (key == "s" ||key == "S"){
-    startTone(2);
-    tilePressed = true;
-    lightButton(2);
-    tilePressNum = 2;
+      key = 2;      
   }
   if (key == "d" ||key == "D"){
-    startTone(3);
-    tilePressed = true;
-    lightButton(3);
-    tilePressNum = 3;
+      key = 3;      
   }
   if (key == "k" ||key == "K"){
-    startTone(4);
-    tilePressed = true;
-    lightButton(4);
-    tilePressNum = 4;
+      key = 4;      
   }
   if (key == "l" ||key == "L"){
-    startTone(5);
-    tilePressed = true;
-    lightButton(5);  
-    tilePressNum = 5;
+      key = 5;      
   }
+  console.log("Key pressed "+key);
+  
+  
+  if (tilePressed != true) {
+    if (key == 1){
+      startTone(1);
+      tilePressed = true;
+      lightButton(1);
+      tilePressNum = 1;
+      guess(1);      
+    }
+    if (key == 2){
+      startTone(2);
+      tilePressed = true;
+      lightButton(2);
+      tilePressNum = 2;
+      guess(2);
+    }
+    if (key == 3){
+      startTone(3);
+      tilePressed = true;
+      lightButton(3);
+      tilePressNum = 3;
+      guess(3);
+    }
+    if (key == 4){
+      startTone(4);
+      tilePressed = true;
+      lightButton(4);
+      tilePressNum = 4;
+      guess(4);
+    }
+    if (key == 5){
+      startTone(5);
+      tilePressed = true;
+      lightButton(5);  
+      tilePressNum = 5;
+      guess(5);
+    }  
+  }
+  
 }
 
-function keyEndTone(){
-  if (tilePressed == true){
+function keyEndTone(event){
+  var key = event.key;
+  if (key == "a" ||key == "A"){
+      key = 1;      
+  }
+  if (key == "s" ||key == "S"){
+      key = 2;      
+  }
+  if (key == "d" ||key == "D"){
+      key = 3;      
+  }
+  if (key == "k" ||key == "K"){
+      key = 4;      
+  }
+  if (key == "l" ||key == "L"){
+      key = 5;      
+  }
+  console.log("Keyup "+key);
+  
+  if (tilePressed == true && tilePressNum == key){
     stopTone();
     clearButton(tilePressNum);
     tilePressNum = 0;
+    tilePressed = false
   }
   
 }
